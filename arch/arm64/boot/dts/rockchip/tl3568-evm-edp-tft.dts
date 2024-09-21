@@ -1,0 +1,88 @@
+
+#include "tl3568-evm.dts"
+
+/ {
+	model = "TL3568-EVM EDP TFT-LCD";
+};
+
+/* hdmi */
+&hdmi_in_vp0{
+	status = "disabled";
+};
+
+&hdmi {
+	status = "disabled";
+};
+
+/* edp */
+&edp_in_vp0 {
+	status = "okay";
+};
+
+&edp {
+	status = "okay";
+	force-hpd;
+	/delete-property/ pinctrl-names;
+	/delete-property/ pinctrl-0;
+	/delete-property/ hpd-gpios;
+};
+
+&edp_panel {
+	pinctrl-names = "default";
+	pinctrl-0 = <&edp_panel_enable>;
+	enable-gpios = <&gpio1 RK_PD0 GPIO_ACTIVE_HIGH>;
+	backlight = <&backlight1>;
+	enable-delay-ms = <20>;
+	prepare-delay-ms = <20>;
+	unprepare-delay-ms = <20>;
+	disable-delay-ms = <20>;
+	status = "okay";
+};
+
+/* lvds */
+&lvds_in_vp2 {
+	status = "disabled";
+};
+
+&lvds {
+	status = "disabled";
+};
+
+&lvds_panel {
+	status = "disabled";
+};
+
+&video_phy0 {
+	status = "disabled";
+};
+
+&route_lvds {
+	status = "disabled";
+};
+
+ /* tft lcd */
+&rgb_in_vp2 {
+	status = "okay";
+};
+
+&rgb {
+	status = "okay";
+};
+
+&tft_lcd_panel {
+	status = "okay";
+	backlight = <&backlight1>;
+};
+
+&route_rgb {
+	status = "okay";
+};
+
+&pinctrl {
+
+	edp_panel {
+		edp_panel_enable: edp-panel-enable {
+			rockchip,pins = <1 RK_PD0 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+	};
+};
